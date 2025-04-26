@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whitecode.ai</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>whitecode.ai</h1>
+        <div class="chat-container">
+            <div id="chat-box"></div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Ask a coding question...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-btn').addEventListener('click', sendMessage);
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const question = userInput.value.trim();
+
+            if (!question) return;
+
+            // Add user message to chat
+            addMessage('user', question);
+            userInput.value = '';
+
+            // Show loading indicator
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message loading';
+            loadingDiv.innerHTML = 'whitecode.ai is thinking...';
+            document.getElementById('chat-box').appendChild(loadingDiv);
+
+            // Scroll to bottom
+            document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+
+            // Send to server
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `question=${encodeURIComponent(question)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remove loading indicator
+                document.querySelector('.loading').remove();
+
+                if (data.error) {
+                    addMessage('ai', `Error: ${data.error}`);
+                } else {
+                    addMessage('ai', data.response);
+                }
+            })
+            .catch(error => {
+                document.querySelector('.loading').remove();
+                addMessage('ai', `Error: ${error.message}`);
+            });
+        }
+
+        function addMessage(sender, content) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            if (sender === 'user') {
+                messageDiv.innerHTML = `<strong>You:</strong><p>${content}</p>`;
+            } else {
+                // Process AI response to enhance formatting
+                let processedContent = content;
+                // Add header for AI responses
+                processedContent = `<div class="ai-response-header">whitecode.ai:</div>` + processedContent;
+                messageDiv.innerHTML = processedContent;
+            }
+
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

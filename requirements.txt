@@ -1,0 +1,6 @@
+flask
+python-dotenv
+google-generativeai
+markdown
+
+#pip install -r requirements.txt

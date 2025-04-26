@@ -1,0 +1,9 @@
+whitecode.ai/
+│
+├── app.py
+├── templates/
+│   └── index.html
+├── static/
+│   └── style.css
+├── .env
+└── requirements.txt
