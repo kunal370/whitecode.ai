@@ -16,3 +16,7 @@ ask coding question hit send– whitecode.ai responds instantly!
 ## Demo
 ![image](https://github.com/user-attachments/assets/746cc867-a8e4-4cc0-9fdd-952877fb0d4f)
 
+![image](https://github.com/user-attachments/assets/cb3c87ca-104d-4e41-806d-b131af148ca6)
+
+
+
