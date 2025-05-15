@@ -11,8 +11,9 @@ It provides formatted code solutions to programming questions with proper indent
 - 🔒 **Secure**: API keys protected via environment variables
 
 
-ask coding question hit send– whitecode.ai responds instantly!
+Ask coding question, hit send– whitecode.ai responds instantly!
 ## Demo
 ![image](https://github.com/user-attachments/assets/a548cd12-fbc8-4fa2-a9f6-403c50aa2b56)
-![image](https://github.com/user-attachments/assets/b8d954f8-2d1f-4bb2-859e-918a787c770b)
+![image](https://github.com/user-attachments/assets/37b516da-e16f-4f99-a328-5e66deb1d28e)
+
 
