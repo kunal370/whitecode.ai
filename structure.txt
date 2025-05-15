@@ -1,0 +1,5 @@
+whitecode.ai/
+│
+├── app.py
+├── .env
+└── requirements.txt
